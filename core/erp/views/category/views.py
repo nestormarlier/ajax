@@ -14,7 +14,6 @@ def category_list(request):
     }
     return render(request, 'category/list.html', data)
 
-
 class CategoryListView(ListView):
     model = Category
     template_name = 'category/list.html'

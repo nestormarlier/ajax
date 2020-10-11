@@ -47,6 +47,10 @@ class FichaTecnica(models.Model):
         db_table = 'ficha_tecnica'
         ordering = ['id']
 
+    def  toJSON(self):
+        item = model_to_dict(self)
+        return item
+
 class Categoria(models.Model):
     #categoria_id = models.IntegerField(verbose_name='Código de categoria', primary_key=True)
     nombre = models.CharField(max_length=30, unique=True)
@@ -102,7 +106,7 @@ class Impresora(models.Model):
 
     activo = models.BooleanField(verbose_name='Impresora Activa', default=True)
     # EN NULO SI SIGUE ACTIVO
-    delete = models.DateField(verbose_name='Fecha baja', null=True, blank=True)
+    delete = models.DateTimeField(verbose_name='Fecha baja', null=True, blank=True)
 
     def __str__(self):
         return "%s" % self.nombre
@@ -110,6 +114,10 @@ class Impresora(models.Model):
     class Meta:
         db_table = 'impresora'
         ordering = ['impresora_id']
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
 
 class Parada(models.Model):
     NOMBRE_CHOICES = [
