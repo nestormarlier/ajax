@@ -15,4 +15,5 @@ urlpatterns = [
     path('categoria/', CategoriaListView.as_view(), name='categoria_list'),
     path('operario/', OperarioListView.as_view(), name='operario_list'), 
     path('impresora/', ImpresoraListView.as_view(), name="impresora_list"),
+    path('category/alta/', CategoryCreateView.as_view(), name='category_create')
 ]
