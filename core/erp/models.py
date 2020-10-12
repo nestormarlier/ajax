@@ -7,7 +7,6 @@ from django.forms import model_to_dict
 
 from core.erp.choices import gender_choices
 
-
 class Category(models.Model):
     name = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
 

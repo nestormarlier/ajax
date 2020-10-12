@@ -50,9 +50,9 @@
 
             $('.btnTest').on('click', function () {
                 $.ajax({
-                    url: '{% url 'erp:impresora_list' %}',
+                    url: '{% url 'erp:cambiomecanico_list' %}',
                     type: 'POST',
-                    data: {impresora_id: 1},
+                    data: {id: 1},
                     dataType: 'json'
                 }).done(function (data) {
                     console.log(data);
