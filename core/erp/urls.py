@@ -4,6 +4,7 @@ from core.erp.views.fichatecnica.views import *
 from core.erp.views.categoria.views import *
 from core.erp.views.operario.views import *
 from core.erp.views.impresora.views import *
+from core.erp.views.parteimpresion.views import *
 
 app_name = 'erp'
 
@@ -15,5 +16,6 @@ urlpatterns = [
     path('categoria/', CategoriaListView.as_view(), name='categoria_list'),
     path('operario/', OperarioListView.as_view(), name='operario_list'), 
     path('impresora/', ImpresoraListView.as_view(), name="impresora_list"),
+    path('parteimpresion/', ParteImpresionListView.as_view(), name="parteimpresion_list"),
     path('category/alta/', CategoryCreateView.as_view(), name='category_create')
 ]

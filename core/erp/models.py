@@ -95,6 +95,10 @@ class Operario(models.Model):
         db_table = 'operario'
         ordering = ['legajo']
 
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
 class Impresora(models.Model):
     impresora_id = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=30)
@@ -154,6 +158,10 @@ class Parada(models.Model):
         db_table = 'parada'
         ordering = ['id']
 
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
 class CambioMecanico(models.Model):
     #cambio_id = models.AutoField(primary_key=True)
     create = models.DateTimeField(
@@ -172,6 +180,10 @@ class CambioMecanico(models.Model):
     def __str__(self):
         return str(self.parada)
 
+    def toJSON(self):
+        item = model_to_dict
+        return item
+
 class Setup(models.Model):
     #setup_id = models.AutoField(primary_key=True)
     create = models.DateTimeField(
@@ -188,6 +200,10 @@ class Setup(models.Model):
     def __str__(self):
         return str(self.parada)
 
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
 class Produccion(models.Model):
     #produccion_id = models.AutoField(primary_key=True)
     create = models.DateTimeField(
@@ -203,6 +219,10 @@ class Produccion(models.Model):
 
     def __str__(self):
         return str(self.parada)
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
 
 class ParteImpresion(models.Model):
     #parte_id = models.AutoField(verbose_name='Orden impresión', primary_key=True)
@@ -235,3 +255,7 @@ class ParteImpresion(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
