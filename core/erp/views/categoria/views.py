@@ -13,11 +13,11 @@ class CategoriaListView(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    def post(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         data = {}
         try:
             data = Categoria.objects.get(pk=request.POST['id']).toJSON()
-        except expression as e:
+        except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data)
 

@@ -68,11 +68,9 @@ class Categoria(models.Model):
         verbose_name = 'Categoría'
         verbose_name_plural = 'Categorías'
 
-    # def toJSON(self):
-    #     # item = {'categoria_id': self.categoria_id, 'nombre': self.nombre, 'id_jede':self.id_jefe}
-    #     item = model_to_dict(self)  # me permite conevertir mi entidad en diccionario , se pueden excludes ciertos
-    #     # parametros
-    #     return item
+    def toJSON(self):
+        item = model_to_dict(self)  # me permite conevertir mi entidad en diccionario , se pueden excludes ciertos
+        return item
 
 class Operario(models.Model):
     legajo = models.IntegerField(primary_key=True)
@@ -96,6 +94,7 @@ class Operario(models.Model):
 
     def toJSON(self):
         item = model_to_dict(self)
+        item['categoria'] = [model_to_dict(c) for c in self.categoria.all()]
         return item
 
 class Impresora(models.Model):
@@ -257,4 +256,14 @@ class ParteImpresion(models.Model):
 
     def toJSON(self):
         item = model_to_dict(self)
+
+        # POST dicccionario con las paradas en los cambios
+        item['cambio'] = [model_to_dict(c) for c in self.cambio.all()]
+
+        # POST dicccionario con las paradas en los setups
+        item['setup'] = [model_to_dict(s) for s in self.setup.all()]
+        
+        # POST dicccionario con las paradas en lo producción
+        item['produccion'] = [model_to_dict(p) for p in self.produccion.all()]
+        
         return item
