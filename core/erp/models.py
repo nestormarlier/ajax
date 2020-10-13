@@ -180,7 +180,7 @@ class CambioMecanico(models.Model):
         return str(self.parada)
 
     def toJSON(self):
-        item = model_to_dict
+        item = model_to_dict(self)
         return item
 
 class Setup(models.Model):

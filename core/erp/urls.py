@@ -6,7 +6,9 @@ from core.erp.views.operario.views import *
 from core.erp.views.impresora.views import *
 from core.erp.views.parteimpresion.views import *
 from core.erp.views.parada.views import *
-from core.erp.views.cambiomecanico.views import CambioMecanicoListView
+from core.erp.views.cambiomecanico.views import *
+from core.erp.views.setup.views import *
+from core.erp.views.produccion.views import *
 
 app_name = 'erp'
 
@@ -20,6 +22,8 @@ urlpatterns = [
     path('impresora/list/', ImpresoraListView.as_view(), name="impresora_list"),
     path('parada/list/', ParadaListView.as_view(), name='parada_list'),
     path('cambiomecanico/list/', CambioMecanicoListView.as_view(), name='cambiomecanico_list'),
+    path('setup/list/', SetupListView.as_view(), name='setup_list'),
+    path('produccion/list/', ProduccionListView.as_view(), name='produccion_list'),
     path('parteimpresion/list/', ParteImpresionListView.as_view(), name="parteimpresion_list"),
     path('category/alta/', CategoryCreateView.as_view(), name='category_create')
 ]
