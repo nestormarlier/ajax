@@ -1,10 +1,13 @@
 from core.erp.models import Operario
-from django.views.generic.list import ListView
+from django.views.generic import ListView, CreateView
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from django.http import JsonResponse
+
+from core.erp.forms import OperarioForm
+from django.urls import reverse_lazy
 
 class OperarioListView(ListView):
     model = Operario
@@ -24,5 +27,21 @@ class OperarioListView(ListView):
         
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = 'Listado de operarios' 
+        context["title"] = 'Listado de operarios'
+        context['entidad'] = 'Operario'
+        context['create_url'] = reverse_lazy('erp:operario_create')
         return context
+
+class OperarioCreateView(CreateView):
+    model = Operario
+    template_name = "operario/create.html"
+    form_class = OperarioForm
+    success_url = reverse_lazy('erp:operario_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Creación operario'
+        context['entidad'] = 'Operario'
+        context['list_url'] = reverse_lazy('erp:operario_list')
+        return context
+    

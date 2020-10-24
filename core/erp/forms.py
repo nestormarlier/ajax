@@ -1,4 +1,4 @@
-from core.erp.models import Category, Categoria, FichaTecnica
+from core.erp.models import Category, Categoria, FichaTecnica, Operario
 from django.forms import *
 
 class CategoryForm(ModelForm):
@@ -63,3 +63,15 @@ class FichaTecnicaForm(ModelForm):
                 }
             )
         }
+
+class OperarioForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class']= 'form-control'
+            form.field.widget.attrs['autocomplete']= 'off'
+        self.fields['legajo'].widget.attrs['autofocus']=True
+    class Meta:
+        model = Operario
+        fields = '__all__'
+        exclude = ['activo','modified','delete']

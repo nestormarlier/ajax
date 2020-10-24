@@ -81,7 +81,7 @@ class Operario(models.Model):
         verbose_name='Fecha de alta', auto_now=True, db_column='creado')
     modified = models.DateTimeField(
         verbose_name='Fecha modificado', auto_now=True, db_column='modificado')
-    activo = models.BooleanField(verbose_name='Operario Activo')
+    activo = models.BooleanField(verbose_name='Operario Activo', default=True)
     delete = models.DateField(verbose_name='Fecha baja', null=True,
                               blank=True)  # PUEDE ALMACENAR VALORES EN NULO SI SIGUE ACTIVO
 
