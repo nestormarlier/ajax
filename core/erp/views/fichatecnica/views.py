@@ -2,9 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from django.utils.decorators import method_decorator
 from core.erp.models import FichaTecnica
+
+from django.urls import reverse_lazy
+
+from core.erp.forms import FichaTecnicaForm
 
 
 def fichatecnica_list(request):
@@ -34,4 +38,20 @@ class FichaTecnicaListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de Fichas Técnicas'
+        context['entidad'] = 'Ficha técnica'
+        context['create_url'] = reverse_lazy('erp:fichatecnica_create')
+        
         return context
+
+class FichaTecnicaCreateView(CreateView):
+        model = FichaTecnica
+        form_class = FichaTecnicaForm
+        template_name = 'fichatecnica/create.html'
+        success_url = reverse_lazy('erp:fichatecnica_list')
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context["title"] = 'Creación de Ficha Técnica'
+            context['entidad'] = 'Ficha técnica'
+            context['list_url'] = reverse_lazy('erp:fichatecnica_list')
+            return context

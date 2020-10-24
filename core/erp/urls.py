@@ -28,4 +28,5 @@ urlpatterns = [
     ### ALTAS ###
     path('category/alta/', CategoryCreateView.as_view(), name="category_create"),
     path('categoria/alta/', CategoriaCreateView.as_view(), name="categoria_create"),
+    path('fichatecnica/alta/', FichaTecnicaCreateView.as_view(), name="fichatecnica_create"),
 ]

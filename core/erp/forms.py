@@ -1,4 +1,4 @@
-from core.erp.models import Category, Categoria
+from core.erp.models import Category, Categoria, FichaTecnica
 from django.forms import *
 
 class CategoryForm(ModelForm):
@@ -40,6 +40,26 @@ class CategoriaForm(ModelForm):
             'id_jefe': TextInput(
                 attrs={
                     'placeholder': 'Ingrese identificacion del jefe'
+                }
+            )
+        }
+
+class FichaTecnicaForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class'] = 'form-control'
+            form.field.widget.attrs['autocomplete'] = 'off'
+        self.fields['nombre'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = FichaTecnica
+        fields = ['nombre', 'user']
+        exclude = ['id','active','created','modified', 'delete']
+        widgets = {
+            'nombre' : TextInput(
+                attrs={
+                    'placeholder' : 'Ingrese nombre'
                 }
             )
         }

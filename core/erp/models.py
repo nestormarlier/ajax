@@ -24,7 +24,7 @@ class Category(models.Model):
 
 class FichaTecnica(models.Model):
     #ficha_tecnica_id = models.AutoField(verbose_name='Ficha Técnica Id', primary_key=True)
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50, unique=True)
     active = models.BooleanField(
         verbose_name='Ficha Técnica Activo', default=True)
 
