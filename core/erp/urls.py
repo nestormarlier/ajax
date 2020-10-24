@@ -27,4 +27,5 @@ urlpatterns = [
     path('parteimpresion/list/', ParteImpresionListView.as_view(), name="parteimpresion_list"),
     ### ALTAS ###
     path('category/alta/', CategoryCreateView.as_view(), name="category_create"),
+    path('categoria/alta/', CategoriaCreateView.as_view(), name="categoria_create"),
 ]
