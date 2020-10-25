@@ -53,5 +53,5 @@ class FichaTecnicaCreateView(CreateView):
             context = super().get_context_data(**kwargs)
             context["title"] = 'Creación de Ficha Técnica'
             context['entidad'] = 'Ficha técnica'
-            context['list_url'] = reverse_lazy('erp:fichatecnica_list')
+            context['list_url'] = self.success_url
             return context

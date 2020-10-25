@@ -1,10 +1,12 @@
-from django.views.generic.list import ListView
+from django.views.generic import ListView, CreateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from django.http import JsonResponse
 
+from django.urls import reverse_lazy
 from core.erp.models import Impresora
+from core.erp.forms import ImpresoraForm
 
 class ImpresoraListView(ListView):
     model = Impresora
@@ -24,5 +26,21 @@ class ImpresoraListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = 'Listado de impresoras' 
+        context["title"] = 'Listado de impresoras'
+        context['entidad'] = 'Impresora'
+        context['create_url'] = reverse_lazy('erp:impresora_create')
         return context
+
+class ImpresoraCreateView(CreateView):
+    model = Impresora
+    form_class = ImpresoraForm
+    template_name = "impresora/create.html"
+    success_url = reverse_lazy('erp:impresora_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Creación de impresoras'
+        context['entidad'] = 'Impresora'
+        context['list_url'] = self.success_url
+        return context
+    

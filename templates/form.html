@@ -21,8 +21,8 @@
                     {% for error in field.errors %}
                         <li>{{ error }}</li>                      
                     {% endfor %}  
-                {% endfor %} -->
-                </ul>
+                {% endfor %}
+                </ul> -->
             </div>                
             {% endif %}
 
@@ -45,7 +45,7 @@
         var errores = '';
         {% for field in form  %}
             {% for error in field.errors %}
-                errores += '{{ error }}\n';
+                    errores += '{{ error }}\n';
             {% endfor %}
                 Swal.fire({
                 icon: 'error',

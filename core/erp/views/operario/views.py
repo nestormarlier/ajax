@@ -42,6 +42,6 @@ class OperarioCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Creación operario'
         context['entidad'] = 'Operario'
-        context['list_url'] = reverse_lazy('erp:operario_list')
+        context['list_url'] = self.success_url
         return context
     

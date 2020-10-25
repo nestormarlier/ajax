@@ -98,7 +98,7 @@ class Operario(models.Model):
         return item
 
 class Impresora(models.Model):
-    impresora_id = models.IntegerField(primary_key=True)
+    impresora_id = models.IntegerField(primary_key=True, verbose_name='Número')
     nombre = models.CharField(max_length=30)
 
     created = models.DateTimeField(

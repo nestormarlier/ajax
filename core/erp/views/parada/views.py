@@ -1,10 +1,12 @@
 from core.erp.models import Parada
-from django.views.generic.list import ListView
+from django.views.generic import ListView, CreateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from django.http import JsonResponse
-
+from core.erp.forms import ParadaForm
+from django.urls import reverse_lazy
+ 
 class ParadaListView(ListView):
     model = Parada
     template_name = 'parada/list.html'
@@ -23,6 +25,22 @@ class ParadaListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = 'Listado de paradas' 
+        context["title"] = 'Listado de paradas'
+        context['entidad'] = 'Parada de máquina'
+        context['create_url']= reverse_lazy('erp:parada_create')
         return context
     
+class ParadaCreateView(CreateView):    
+    model = Parada
+    template_name = "parada/create.html"
+    form_class = ParadaForm
+    success_url = reverse_lazy('erp:parada_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Creación paradas de máquina'
+        context['entidad'] = 'Parada de máquina'
+        context['list_url'] = self.success_url
+        return context
+    
+

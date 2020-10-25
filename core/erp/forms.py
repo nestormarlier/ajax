@@ -1,4 +1,4 @@
-from core.erp.models import Category, Categoria, FichaTecnica, Operario
+from core.erp.models import Category, Categoria, FichaTecnica, Operario, Impresora, Parada
 from django.forms import *
 
 class CategoryForm(ModelForm):
@@ -75,3 +75,53 @@ class OperarioForm(ModelForm):
         model = Operario
         fields = '__all__'
         exclude = ['activo','modified','delete']
+
+class ImpresoraForm(ModelForm): 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class']= 'form-control'
+            form.field.widget.attrs['autocomplete']= 'off'
+        self.fields['impresora_id'].widget.attrs['autofocus']= True
+    
+    class Meta:
+        model = Impresora
+        fields = '__all__'
+        exclude = ['created', 'modified', 'activo', 'delete']
+
+        widgets={
+            'impresora_id': NumberInput(
+                attrs={
+                    'placeholder':'Ingrese número de impresora'
+                }
+            ),
+            'nombre':TextInput(
+                attrs={
+                    'placeholder':'Ingrese nombre de la impresora'
+                }
+            )
+        }
+
+class ParadaForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class']= 'form-control'
+            form.field.widget.attrs['autocomplete']= 'off'
+        self.fields['nombre'].widget.attrs['autofocus']= True
+    class Meta:
+        model = Parada
+        fields = '__all__'
+        exclude = ['created', 'modified','active', 'delete']
+        widgets = {
+            'nombre': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese nombre de parada de máquina'
+                }
+            ),
+            'sector_asignado': Select (
+                attrs={
+                    'placeholder': 'Ingrese a que sector implica la parada de máquina'
+                }
+            )
+        }

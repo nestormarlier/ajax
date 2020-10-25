@@ -30,4 +30,6 @@ urlpatterns = [
     path('categoria/alta/', CategoriaCreateView.as_view(), name="categoria_create"),
     path('fichatecnica/alta/', FichaTecnicaCreateView.as_view(), name="fichatecnica_create"),
     path('operario/alta/', OperarioCreateView.as_view(), name="operario_create"),
+    path('impresora/alta/', ImpresoraCreateView.as_view(), name='impresora_create'),
+    path('parada/alta/', ParadaCreateView.as_view(), name='parada_create'),
 ]
