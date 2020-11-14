@@ -37,7 +37,7 @@ class CategoryListView(ListView):
         context['title'] = 'Listado de Categorías'
         context['create_url'] = reverse_lazy('erp:category_create')
         context['entidad'] = 'Category'
-        context['list_url'] = reverse_lazy('erp:category_list')
+        #context['list_url'] = reverse_lazy('erp:category_list')
         return context
 
 class CategoryCreateView(CreateView):

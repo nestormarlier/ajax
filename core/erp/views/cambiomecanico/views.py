@@ -1,8 +1,11 @@
 from core.erp.models import CambioMecanico
-from django.views.generic.list import ListView
+from django.views.generic import ListView, CreateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+
+from core.erp.forms import CambioMecanicoForm
+from django.urls import reverse_lazy
 
 class CambioMecanicoListView(ListView):
     model = CambioMecanico
@@ -23,4 +26,19 @@ class CambioMecanicoListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Listado de cambio mecánicos asignados a un parte de impresión'
+        context['create_url'] = reverse_lazy('erp:cambiomecanico_create')
+        context["entidad"] = 'Cambio Mecánico'
+        return context
+
+class CambioMecanicoCreateView(CreateView):
+    model = CambioMecanico
+    template_name = "cambiomecanico/create.html"
+    form_class = CambioMecanicoForm
+    success_url = reverse_lazy('erp:cambiomecanico_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['list_url'] = self.success_url
+        context["title"] = 'Cambio Mecánico'
+        context['entidad'] = 'Cambio Mecánico'
         return context

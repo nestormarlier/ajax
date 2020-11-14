@@ -1,5 +1,7 @@
-from core.erp.models import Category, Categoria, FichaTecnica, Operario, Impresora, Parada
+from core.erp.models import Category, Categoria, FichaTecnica, Operario, Impresora, Parada, CambioMecanico
 from django.forms import *
+
+from django.contrib.admin import widgets
 
 class CategoryForm(ModelForm):
     def __init__(self,*args, **kwargs):
@@ -125,3 +127,18 @@ class ParadaForm(ModelForm):
                 }
             )
         }
+
+class CambioMecanicoForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CambioMecanicoForm, self).__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class'] = 'form-control'
+            form.field.widget.attrs['autocomplete'] = 'off'
+            self.fields['create'].widget.attrs['readonly'] = True
+            self.fields['fecha_fin'].widget = widgets.AdminSplitDateTime()
+            self.fields['parada'].widget.attrs['autofocus'] = True
+    
+    class Meta:
+        model = CambioMecanico
+        fields = '__all__'
+        exclude = ['id', 'modified']
