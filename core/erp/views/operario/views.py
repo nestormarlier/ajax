@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from core.erp.forms import OperarioForm
 from django.urls import reverse_lazy
 
+
 class OperarioListView(ListView):
     model = Operario
     template_name = 'operario/list.html'
@@ -16,7 +17,7 @@ class OperarioListView(ListView):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
-    
+
     def post(self, request, *args, **kwargs):
         data = {}
         try:
@@ -24,13 +25,14 @@ class OperarioListView(ListView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data)
-        
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Listado de operarios'
         context['entidad'] = 'Operario'
         context['create_url'] = reverse_lazy('erp:operario_create')
         return context
+
 
 class OperarioCreateView(CreateView):
     model = Operario
@@ -44,4 +46,3 @@ class OperarioCreateView(CreateView):
         context['entidad'] = 'Operario'
         context['list_url'] = self.success_url
         return context
-    

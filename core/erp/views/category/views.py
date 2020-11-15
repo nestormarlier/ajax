@@ -46,7 +46,22 @@ class CategoryCreateView(CreateView):
     template_name = 'category/create.html'
     success_url = reverse_lazy('erp:category_list')
 
-    # def post(self,request, *args , **kwargs):
+    def post(self,request, *args , **kwargs):
+        data = {}
+        action = request.POST['accion']
+        try:
+            if action == 'add':
+                #form = CategoryForm(request.POST)
+                form = self.get_form() #con esta propiedad obtengo todos los datos enviado, inclusive si son imagenes
+                if form.is_valid():
+                    form.save()
+                else:
+                    data = form.errors
+            else:
+                data['error'] = 'No ha ingresado ninguna opción'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data)
     #     print(request.POST)
 
     #     #a nuestro formulario CategoryForm le asigno lo que trae el POST y se lo asigno a la variable
@@ -65,5 +80,6 @@ class CategoryCreateView(CreateView):
         context["title"] = 'Creación de una categoría'
         context["entidad"] = 'Category'
         context['list_url'] = reverse_lazy('erp:category_list')
+        context['accion'] = 'add'
         return context
     
