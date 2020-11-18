@@ -67,7 +67,7 @@
             data: parametros,
             dataType: 'json'
         }).done(function (data) {
-            /*console.log(data);*/
+            console.log(data);
             if(!data.hasOwnProperty('error')){
                 location.href = '{{ list_url }}';
                 return false;

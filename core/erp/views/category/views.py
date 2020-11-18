@@ -53,8 +53,8 @@ class CategoryCreateView(CreateView):
             if action == 'add':
                 #form = CategoryForm(request.POST)
                 form = self.get_form() #con esta propiedad obtengo todos los datos enviado, inclusive si son imagenes
-                if form.is_valid():
-                    form.save()
+                if form.is_valid(False):
+                    form.save(True)
                 else:
                     data['error'] = form.errors
             else:
