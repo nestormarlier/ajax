@@ -1,9 +1,9 @@
 function mensaje_error(obj) {
     var html = '';
     if (typeof (obj) === 'object') {
-        html = '<ul style="text-align: left">';
-        $.each(obj, function(key,value){
-            html+='<li>'+key+': '+value+'</li>';
+        html = '<ul style="text-align: left;">';
+        $.each(obj, function (key, value) {
+            html += '<li>' + key + ': ' + value + '</li>';
         });
         html += '</ul>';
     }
@@ -11,8 +11,8 @@ function mensaje_error(obj) {
         html = '<p>'+obj+'</p>';
     }
     Swal.fire({
-        icon: 'error',
-        title: 'Atención ha ocurrido un error',
-        html: html
+        title: 'Error!',
+        html: html,
+        icon: 'error'
     });
 }
