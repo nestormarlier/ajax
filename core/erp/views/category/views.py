@@ -48,15 +48,12 @@ class CategoryCreateView(CreateView):
 
     def post(self,request, *args , **kwargs):
         data = {}
-        action = request.POST['accion']
         try:
+            action = request.POST['accion']
             if action == 'add':
                 #form = CategoryForm(request.POST)
                 form = self.get_form() #con esta propiedad obtengo todos los datos enviado, inclusive si son imagenes
-                if form.is_valid():
-                    form.save()
-                else:
-                    data['error'] = form.errors
+                data = form.save()
             else:
                 data['error'] = 'No ha ingresado ninguna opción'
         except Exception as e:
